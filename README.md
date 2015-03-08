@@ -1,10 +1,70 @@
-## Introduction
+## Ronnys Submission for Project 1
+There are a total of 5 R files submitted as part of this assignment, along with 4 PNG images. 
 
-This assignment uses data from
-the <a href="http://archive.ics.uci.edu/ml/">UC Irvine Machine
-Learning Repository</a>, a popular repository for machine learning
-datasets. In particular, we will be using the "Individual household
-electric power consumption Data Set" which I have made available on
+### getData.R
+Within this file there is a function called:
+
+    getDataInDateRange()
+
+This function efficiently imports a subset of the data from the text file. It does so by only reading the relevant lines that are associated with the desired date-time range. 
+
+This assignment involved looking at readings from the 1st and 2nd of February 2007. However, with the getDataInDateRange() function, we can easily and efficiently exctract readings from any arbitrary date-time range. This is done by simply feeding the desired start and end datetimes as arguments. 
+
+Example Usage:
+
+    dataFile <- "household_power_consumption.txt"
+    
+    # The range of datetimes that we are interested in looking at
+    startDate <- strptime("2007-02-01 0:0:0", format="%Y-%m-%d %H:%M:%S")
+    endDate <- strptime("2007-02-02 23:59:0", format="%Y-%m-%d %H:%M:%S")
+    
+    getDataInDateRange(datafile, startDate, endDate)
+
+#### Why its more efficient?
+It achieves its efficiency by ONLY reading the relevant lines from the source file, instead of reading the whole file into memory, and then filtering. 
+
+It calculates what the relevant lines in the text file are by firstly taking a one line sample of the data. From this sample, it can determine the timestamp of of the very first reading. Once it has established that, it's just a matter of calculating how many minutes must elapse from this initial measurement and the start of the desired range. It also calculates how many minutes there are in the desired range. The number of minutes determines the number of rows that must be skipped and read in the text file. 
+
+
+
+### plotN.R
+There are 4 R files that are responsible for creating a different plot and saving it as a PNG file. 
+
+* plot1.R
+* plot2.R
+* plot3.R
+* plot4.R
+
+These all import the getData.R file, and make a call to the getDataInDateRange() function to create the desired dataframe. Each makes a separate plot, which is saved as a PNG file.  
+
+
+### plotN.png
+These are samples of the files that are generated after running each of the plotN.R files. 
+
+* plot1.png
+* plot2.png
+* plot3.png
+* plot4.png
+
+#### Ronny's Plot 1
+![Ronny's Plot 1](plot1.png) 
+
+#### Ronny's Plot 2
+![Ronny's Plot 2](plot2.png) 
+
+#### Ronny's Plot 3
+![Ronny's Plot 3](plot3.png) 
+
+#### Ronny's Plot 4
+![Ronny's Plot 4](plot4.png) 
+
+
+## Data Used to generate Plots
+This assignment uses data from the 
+<a href="http://archive.ics.uci.edu/ml/">UC Irvine Machine Learning 
+Repository</a>, a popular repository for machine learning datasets. 
+In particular, it uses the 
+"Individual household electric power consumption Data Set" which was made available on
 the course web site:
 
 
@@ -33,63 +93,11 @@ web site</a>:
 <li><b>Sub_metering_3</b>: energy sub-metering No. 3 (in watt-hour of active energy). It corresponds to an electric water-heater and an air-conditioner.</li>
 </ol>
 
-## Loading the data
 
 
+## Target Plots
 
-
-
-When loading the dataset into R, please consider the following:
-
-* The dataset has 2,075,259 rows and 9 columns. First
-calculate a rough estimate of how much memory the dataset will require
-in memory before reading into R. Make sure your computer has enough
-memory (most modern computers should be fine).
-
-* We will only be using data from the dates 2007-02-01 and
-2007-02-02. One alternative is to read the data from just those dates
-rather than reading in the entire dataset and subsetting to those
-dates.
-
-* You may find it useful to convert the Date and Time variables to
-Date/Time classes in R using the `strptime()` and `as.Date()`
-functions.
-
-* Note that in this dataset missing values are coded as `?`.
-
-
-## Making Plots
-
-Our overall goal here is simply to examine how household energy usage
-varies over a 2-day period in February, 2007. Your task is to
-reconstruct the following plots below, all of which were constructed
-using the base plotting system.
-
-First you will need to fork and clone the following GitHub repository:
-[https://github.com/rdpeng/ExData_Plotting1](https://github.com/rdpeng/ExData_Plotting1)
-
-
-For each plot you should
-
-* Construct the plot and save it to a PNG file with a width of 480
-pixels and a height of 480 pixels.
-
-* Name each of the plot files as `plot1.png`, `plot2.png`, etc.
-
-* Create a separate R code file (`plot1.R`, `plot2.R`, etc.) that
-constructs the corresponding plot, i.e. code in `plot1.R` constructs
-the `plot1.png` plot. Your code file **should include code for reading
-the data** so that the plot can be fully reproduced. You should also
-include the code that creates the PNG file.
-
-* Add the PNG file and R code file to your git repository
-
-When you are finished with the assignment, push your git repository to
-GitHub so that the GitHub version of your repository is up to
-date. There should be four PNG files and four R code files.
-
-
-The four plots that you will need to construct are shown below. 
+Below are the images of the target plots that we were asked to try construct using R code. 
 
 
 ### Plot 1
