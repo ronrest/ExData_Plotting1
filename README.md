@@ -20,7 +20,7 @@ Example Usage:
     
     getDataInDateRange(datafile, startDate, endDate)
 
-#### Why its more efficient?
+#### What makes it efficient?
 It achieves its efficiency by ONLY reading the relevant lines from the source file, instead of reading the whole file into memory, and then filtering. 
 
 It calculates what the relevant lines in the text file are by firstly taking a one line sample of the data. From this sample, it can determine the timestamp of of the very first reading. Once it has established that, it's just a matter of calculating how many minutes must elapse from this initial measurement and the start of the desired range. It also calculates how many minutes there are in the desired range. The number of minutes determines the number of rows that must be skipped and read in the text file. 
